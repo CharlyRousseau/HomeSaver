@@ -1,0 +1,55 @@
+name: Test and Notify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest src
+        continue-on-error: true
+        id: pytest
+
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        if: always()
+        with:
+          server_address: smtp.infomaniak.com
+          server_port: 465
+          username: ${{ secrets.INFOMANIAK_USERNAME }}
+          password: ${{ secrets.INFOMANIAK_PASSWORD }}
+          subject: "GitHub Actions - Test ${{ job.status }}"
+          body: |
+            Hello,
+
+            The tests for the GitHub Actions workflow have completed.
+
+            Status: ${{ job.status }}
+
+            Check the details here: ${{ github.run_url }}
+
+            Regards,
+            GitHub Actions
+          to: charly01rousseau@gmail.com
+          from: GitHub Actions <${{ secrets.INFOMANIAK_USERNAME }}>
