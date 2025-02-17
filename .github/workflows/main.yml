@@ -108,5 +108,5 @@ jobs:
                 </div>
             </body>
             </html>
-          to: charly01rousseau@gmail.com
+          to: cedric.surquin@gmail.com
           from: GitHub Actions <${{ secrets.INFOMANIAK_USERNAME }}>
