@@ -1,0 +1,12 @@
+coverage==7.6.11
+iniconfig==2.0.0
+packaging==24.2
+pathlib==1.0.1
+pluggy==1.5.0
+progressbar==2.5
+progressbar2==4.5.0
+pytest==8.3.4
+pytest-cov==6.0.0
+python-utils==3.9.1
+tqdm==4.67.1
+typing_extensions==4.12.2
