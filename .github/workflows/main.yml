@@ -41,15 +41,72 @@ jobs:
           password: ${{ secrets.INFOMANIAK_PASSWORD }}
           subject: "GitHub Actions - Test ${{ job.status }}"
           body: |
-            Hello,
-
-            The tests for the GitHub Actions workflow have completed.
-
-            Status: ${{ job.status }}
-
-            Check the details here: ${{ github.run_url }}
-
-            Regards,
-            GitHub Actions
+            <!DOCTYPE html>
+            <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Home Saver - Test Results</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f9;
+                        margin: 0;
+                        padding: 20px;
+                    }
+                    .container {
+                        background-color: #ffffff;
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                        border-radius: 8px;
+                    }
+                    h1 {
+                        color: #4CAF50;
+                        text-align: center;
+                    }
+                    p {
+                        color: #555555;
+                        line-height: 1.6;
+                    }
+                    .status {
+                        font-weight: bold;
+                        color: #ff6f61;
+                    }
+                    .button {
+                        display: block;
+                        width: 200px;
+                        text-align: center;
+                        background-color: #4CAF50;
+                        color: white;
+                        padding: 10px 0;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        margin: 20px auto;
+                    }
+                    .footer {
+                        text-align: center;
+                        font-size: 0.9em;
+                        color: #aaaaaa;
+                        margin-top: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Home Saver - Test Results</h1>
+                    <p>Hello Cédric Surquin,</p>
+                    <p>The tests for the <strong>Home Saver</strong> GitHub Actions workflow have completed.</p>
+                    <p>Status: <span class="status">${{ job.status }}</span></p>
+                    <a href="${{ github.run_url }}" class="button">View Details</a>
+                    <p>Thank you for using Home Saver.</p>
+                    <p>Regards,<br>Home Saver Team</p>
+                </div>
+                <div class="footer">
+                    © 2024 Home Saver. All rights reserved.
+                </div>
+            </body>
+            </html>
           to: charly01rousseau@gmail.com
           from: GitHub Actions <${{ secrets.INFOMANIAK_USERNAME }}>
