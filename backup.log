@@ -1,0 +1,9 @@
+2025-02-17 20:57:56,841 - INFO - Creating Backup...
+2025-02-17 20:57:58,072 - ERROR - An error occurred while adding daemon.sock to the backup: [Errno 102] Operation not supported on socket: '/Users/charly/.docker/mutagen/daemon/daemon.sock'
+2025-02-17 20:58:05,922 - ERROR - An error occurred while adding docker.sock to the backup: [Errno 102] Operation not supported on socket: '/Users/charly/.docker/run/docker.sock'
+2025-02-17 20:58:05,922 - ERROR - An error occurred while adding user-analytics.otlp.grpc.sock to the backup: [Errno 102] Operation not supported on socket: '/Users/charly/.docker/run/user-analytics.otlp.grpc.sock'
+2025-02-17 20:58:09,081 - ERROR - An error occurred while adding gui-sock-17177 to the backup: [Errno 102] Operation not supported on socket: '/Users/charly/.local/share/wezterm/gui-sock-17177'
+2025-02-17 20:58:09,081 - ERROR - An error occurred while adding default-org.wezfurlong.wezterm to the backup: [Errno 102] Operation not supported on socket: '/Users/charly/.local/share/wezterm/default-org.wezfurlong.wezterm'
+2025-02-17 20:58:09,082 - ERROR - An error occurred while adding podman.sock to the backup: [Errno 2] No such file or directory: '/Users/charly/.local/share/containers/podman/machine/podman.sock'
+2025-02-17 20:58:19,134 - INFO - Backup process completed.
+2025-02-17 20:58:19,135 - INFO - Backup created successfully: /Users/charly/backup.zip
