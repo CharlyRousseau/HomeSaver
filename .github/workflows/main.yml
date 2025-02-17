@@ -99,7 +99,7 @@ jobs:
                     <p>Hello Cédric Surquin,</p>
                     <p>The tests for the <strong>Home Saver</strong> GitHub Actions workflow have completed.</p>
                     <p>Status: <span class="status">${{ job.status }}</span></p>
-                    <a href="${{ github.run_url }}" class="button">View Details</a>
+                    <a href="https://github.com/CharlyRousseau/HomeSaver" class="button">View Details</a>
                     <p>Thank you for using Home Saver.</p>
                     <p>Regards,<br>Home Saver Team</p>
                 </div>
