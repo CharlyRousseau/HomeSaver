@@ -1,0 +1,112 @@
+name: Test and Notify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest src
+        continue-on-error: true
+        id: pytest
+
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        if: always()
+        with:
+          server_address: smtp.infomaniak.com
+          server_port: 465
+          username: ${{ secrets.INFOMANIAK_USERNAME }}
+          password: ${{ secrets.INFOMANIAK_PASSWORD }}
+          subject: "Rendu Charly Rousseau GitHub Actions - Test ${{ job.status }}"
+          html_body: |
+            <!DOCTYPE html>
+            <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Home Saver - Test Results</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f9;
+                        margin: 0;
+                        padding: 20px;
+                    }
+                    .container {
+                        background-color: #ffffff;
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                        border-radius: 8px;
+                    }
+                    h1 {
+                        color: #4CAF50;
+                        text-align: center;
+                    }
+                    p {
+                        color: #555555;
+                        line-height: 1.6;
+                    }
+                    .status {
+                        font-weight: bold;
+                        color: #ff6f61;
+                    }
+                    .button {
+                        display: block;
+                        width: 200px;
+                        text-align: center;
+                        background-color: #4CAF50;
+                        color: white;
+                        padding: 10px 0;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        margin: 20px auto;
+                    }
+                    .footer {
+                        text-align: center;
+                        font-size: 0.9em;
+                        color: #aaaaaa;
+                        margin-top: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Home Saver - Test Results</h1>
+                    <p>Hello Cédric Surquin,</p>
+                    <p>The tests for the <strong>Home Saver</strong> GitHub Actions workflow have completed.</p>
+                    <p>Status: <span class="status">${{ job.status }}</span></p>
+                    <a href="https://github.com/CharlyRousseau/HomeSaver" class="button">View Details</a>
+                    <p>Thank you for using Home Saver.</p>
+                    <p>Regards,<br>Home Saver Team</p>
+                </div>
+                <div class="footer">
+                    © 2024 Home Saver. All rights reserved.
+                </div>
+            </body>
+            </html>
+          to: cedric.surquin@gmail.com
+          from: GitHub Actions <${{ secrets.INFOMANIAK_USERNAME }}>
